@@ -3,8 +3,11 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Random;
 import javax.swing.*;
+
+import javafx.application.Application;
+import javafx.stage.Stage;
  
-public class Game2048 extends JPanel {
+public class Game2048 extends Application {
  
     enum State {
         start, won, running, over
@@ -266,6 +269,12 @@ public class Game2048 extends JPanel {
             f.setVisible(true);
         });
     }
+
+	@Override
+	public void start(Stage arg0) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
 }
  
 class Tile {
