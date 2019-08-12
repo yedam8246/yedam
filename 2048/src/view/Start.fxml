@@ -4,9 +4,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="940.0" prefWidth="640.0" style="-fx-background-color: f3e1d3;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.StartController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#key" prefHeight="940.0" prefWidth="640.0" style="-fx-background-color: f3e1d3;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.StartController">
    <children>
-      <ImageView fitHeight="178.0" fitWidth="267.0" layoutX="187.0" layoutY="470.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="start" fitHeight="178.0" fitWidth="267.0" layoutX="187.0" layoutY="470.0" onMouseClicked="#start" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../Desktop/2048/start.png" />
          </image>
