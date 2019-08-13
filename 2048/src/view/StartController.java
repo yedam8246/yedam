@@ -28,11 +28,36 @@ public class StartController implements Initializable {
 	@FXML
 	public void key(KeyEvent evt) {
 		
-		if(evt.getCode()==KeyCode.RIGHT) {
-			start.setX(start.getX()+10);
-		}else if(evt.getCode()==KeyCode.LEFT) {
-			start.setX(start.getX()-10);
+		switch(evt.getCode()) {
+		
+		case DOWN:
+			if(true) {
+				
+			}
+			break;
+			
+		case UP:
+			if(true) {
+				
+			}
+			break;
+			
+		case LEFT:
+			if(true) {
+				
+			}
+			break;
+			
+		case RIGHT:
+			if(true) {
+				
+			}
+			break;
+		
+		
 		}
+		
+		
 	}
 	
 	
