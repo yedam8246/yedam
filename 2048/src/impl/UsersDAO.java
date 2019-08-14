@@ -20,11 +20,13 @@ public class UsersDAO {
 		return instance;
 	}
 	
-	//아이디가 있는지 확인
-	public boolean checkId(String id) {
+	//아이디 조회
+	public Users selectOne(String id) {
 		conn=DAO.getConnect();
 		
-		String sql="select id from users where id=?";
+		Users usr=new Users();
+		
+		String sql="select id, pw, nick from users where id=?";
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -33,26 +35,28 @@ public class UsersDAO {
 			
 			rs=pstmt.executeQuery();
 			
-			
-			if(rs.next())
-				if(id.equals(rs.getString("id")))
-					return false;
-			
+			if(rs.next()) {
+				usr.setId(rs.getString("id"));
+				usr.setPw(rs.getString("pw"));
+				usr.setNick(rs.getString("nick"));
+			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		return true;
+		return usr;
 		
 	}
 	
-	//닉네임이 있는지 확인
+	//닉네임 조회
 	
-	public boolean checkNick(String nick) {
+	public Users selectOneNick(String nick) {
 		conn=DAO.getConnect();
 		
-		String sql="select nick from users where nick=?";
+		Users usr=new Users();
+		
+		String sql="select id, pw, nick from users where nick=?";
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -61,17 +65,17 @@ public class UsersDAO {
 			
 			rs=pstmt.executeQuery();
 			
-			
-			if(rs.next())
-				if(nick.equals(rs.getString("nick")))
-					return false;
-			
+			if(rs.next()) {
+				usr.setId(rs.getString("id"));
+				usr.setPw(rs.getString("pw"));
+				usr.setNick(rs.getString("nick"));
+			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		return true;
+		return usr;
 		
 	}
 	
