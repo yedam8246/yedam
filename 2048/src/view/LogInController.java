@@ -2,7 +2,6 @@ package view;
 
 import java.io.IOException;
 
-import game.Game;
 import impl.UsersDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.Users;
 
@@ -34,19 +34,20 @@ public class LogInController {
 	private Button logIn;
 	@FXML
 	private Button signUp;
+	@FXML
+	private Button score;
 	
 	@FXML
 	private Label alert;
 
 	public void logIn() {
-//		Users usr = new Users();
-//
-//		usr = UsersDAO.getInstance().selectOne(txtId.getText());
-//
-//		if (!usr.getPw().equals(txtPw.getText())) {
-//			return;
-//		}
-		
+		Users usr = new Users();
+
+		usr = UsersDAO.getInstance().selectOne(txtId.getText(), txtPw.getText());
+		if(usr.getId()==null){
+			alert.setText("check your id and password");
+			return;
+		}
 		
 		AnchorPane gamePage;
 		try {
@@ -56,7 +57,13 @@ public class LogInController {
 			Stage primaryStage = (Stage) logIn.getScene().getWindow();
 			
 			primaryStage.setScene(scene);
+			primaryStage.setTitle("2048");
+			primaryStage.setHeight(850);
+			primaryStage.setWidth(680);
+			primaryStage.centerOnScreen();
+			primaryStage.setResizable(false);
 			
+			gamePage.requestFocus();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -70,6 +77,20 @@ public class LogInController {
 			Scene scene=new Scene(signUpPage);
 			
 			Stage primaryStage = (Stage) signUp.getScene().getWindow();
+			
+			primaryStage.setScene(scene);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void ScorePage() {
+		AnchorPane scorePage;
+		try {
+			scorePage = FXMLLoader.load(getClass().getResource("/view/Score.fxml"));
+			Scene scene=new Scene(scorePage);
+			
+			Stage primaryStage=(Stage)signUp.getScene().getWindow();
 			
 			primaryStage.setScene(scene);
 		} catch (IOException e) {

@@ -22,6 +22,29 @@ public class ScoreDAO {
 	public static ScoreDAO getInstance() {
 		return instance;
 	}
+	
+	public void insertScore(int score) {
+		
+		conn=DAO.getConnect();
+		
+		String sql="insert into score values(s_id_seq.nextval, ?, ?, sysdate)";
+		Users usr=new Users();
+		try {
+			
+			pstmt=conn.prepareStatement(sql);
+			
+			pstmt.setString(1, usr.getNick());
+			pstmt.setInt(2, score);
+			
+			int r=pstmt.executeUpdate();
+			
+			System.out.println(r+" has been updated");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
 
 	public List<Score> selectOne(String nick) {
 		conn = DAO.getConnect();

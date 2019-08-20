@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import game.GenerateSquares;
+import impl.ScoreDAO;
 import javafx.animation.KeyFrame;
 import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
@@ -209,12 +210,12 @@ public class GameController implements Initializable{
 					loadTheLastGame();
 				});
 
-				topGridOfSquares.requestFocus(); // The GridPane requests focus.
+				anchorPane.requestFocus(); // The GridPane requests focus.
 
 				// Checks the keyboard for a button click from the user. Moves UP, DOWN, LEFT,
 				// RIGHT, displays the help windows, exits the game,
 				// loads an old game, saves the current game and undos a move (up to 10 moves).
-				topGridOfSquares.setOnKeyPressed(e -> {
+				anchorPane.setOnKeyPressed(e -> {
 					switch (e.getCode()) {
 					case DOWN:
 						noRotation();
@@ -962,6 +963,7 @@ public class GameController implements Initializable{
 
 		Label endingScore = new Label("Your final score is: " + scoreCounter[0]);
 		endingScore.setFont(Font.font("Calibri", 15));
+		ScoreDAO.getInstance().insertScore(scoreCounter[0]);
 
 		Label endingMoves = new Label("  The number of moves you made is: " + moveCounter[0]);
 		endingMoves.setFont(Font.font("Calibri", 15));

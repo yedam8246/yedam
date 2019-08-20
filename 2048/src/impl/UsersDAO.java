@@ -23,6 +23,35 @@ public class UsersDAO {
 	}
 
 	// �븘�씠�뵒 議고쉶
+	public Users selectOne(String id, String pw) {
+		conn = DAO.getConnect();
+
+		Users usr = new Users();
+
+		String sql = "select id, pw, nick from users where id=? and pw=?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, id);
+			pstmt.setString(2, pw);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				usr.setId(rs.getString("id"));
+				usr.setPw(rs.getString("pw"));
+				usr.setNick(rs.getString("nick"));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return usr;
+
+	}
+	
 	public Users selectOne(String id) {
 		conn = DAO.getConnect();
 
