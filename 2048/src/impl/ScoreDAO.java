@@ -10,6 +10,7 @@ import java.util.List;
 import common.DAO;
 import model.Score;
 import model.Users;
+import view.LogInController;
 
 public class ScoreDAO {
 
@@ -28,7 +29,7 @@ public class ScoreDAO {
 		conn=DAO.getConnect();
 		
 		String sql="insert into score values(s_id_seq.nextval, ?, ?, sysdate)";
-		Users usr=new Users();
+		Users usr=LogInController.usr;
 		try {
 			
 			pstmt=conn.prepareStatement(sql);

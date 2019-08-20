@@ -39,9 +39,10 @@ public class LogInController {
 	
 	@FXML
 	private Label alert;
-
+	
+	public static Users usr;
+	
 	public void logIn() {
-		Users usr = new Users();
 
 		usr = UsersDAO.getInstance().selectOne(txtId.getText(), txtPw.getText());
 		if(usr.getId()==null){
