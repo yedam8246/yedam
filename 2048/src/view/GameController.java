@@ -964,6 +964,7 @@ public class GameController implements Initializable{
 		Label endingScore = new Label("Your final score is: " + scoreCounter[0]);
 		endingScore.setFont(Font.font("Calibri", 15));
 		ScoreDAO.getInstance().insertScore(scoreCounter[0]);
+		ScoreDAO.getInstance().highScore(scoreCounter[0]);
 
 		Label endingMoves = new Label("  The number of moves you made is: " + moveCounter[0]);
 		endingMoves.setFont(Font.font("Calibri", 15));

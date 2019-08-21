@@ -23,28 +23,27 @@ public class ScoreDAO {
 	public static ScoreDAO getInstance() {
 		return instance;
 	}
-	
+
 	public void insertScore(int score) {
-		
-		conn=DAO.getConnect();
-		
-		String sql="insert into score values(s_id_seq.nextval, ?, ?, sysdate)";
-		Users usr=LogInController.usr;
+
+		conn = DAO.getConnect();
+
+		String sql = "insert into score values(s_id_seq.nextval, ?, ?, sysdate)";
+		Users usr = LogInController.usr;
 		try {
-			
-			pstmt=conn.prepareStatement(sql);
-			
+
+			pstmt = conn.prepareStatement(sql);
+
 			pstmt.setString(1, usr.getNick());
 			pstmt.setInt(2, score);
-			
-			int r=pstmt.executeUpdate();
-			
-			System.out.println(r+" has been updated");
+
+			int r = pstmt.executeUpdate();
+
+			System.out.println(r + " has been updated");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
+
 	}
 
 	public List<Score> selectOne(String nick) {
@@ -124,10 +123,31 @@ public class ScoreDAO {
 		return list;
 
 	}
+	
+	public List<Score> searchHighScore() {
+		conn=DAO.getConnect();
+		Users usr=LogInController.usr;
+		
+		String sql="select max(score), nick from score";
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
 
-	public boolean highScore(Users usr) {
+	public void highScore(int score) {
 		conn = DAO.getConnect();
-
+		Users usr = LogInController.usr;
 		int s = 0;
 
 		String sql = "select highscore from users where nick=?";
@@ -142,29 +162,28 @@ public class ScoreDAO {
 			if (rs.next()) {
 				s = rs.getInt("highscore");
 
-				if (s > usr.getHiScore())
-					return false;
+				if (s < score) {
+
+					sql = "update users set highscore=? where nick=?";
+					pstmt=conn.prepareStatement(sql);
+					
+					pstmt.setInt(1, score);
+					pstmt.setString(2, usr.getNick());
+
+					int r = pstmt.executeUpdate();
+
+					System.out.println(r + "건 업데이트");
+				}
 			}
-
-			sql = "update users set highscore=? where nick=?";
-
-			pstmt.setInt(1, usr.getHiScore());
-			pstmt.setString(2, usr.getNick());
-
-			int r = pstmt.executeUpdate();
-
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				conn.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-
-		return true;
 	}
-	
 
 }

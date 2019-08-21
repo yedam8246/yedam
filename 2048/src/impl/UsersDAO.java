@@ -114,7 +114,7 @@ public class UsersDAO {
 	public void signUp(Users usr) {
 		conn = DAO.getConnect();
 
-		String sql = "insert into users(id, pw, nick, highscore)" + "values(?,?,?,null)";
+		String sql = "insert into users(id, pw, nick, highscore)" + "values(?,?,?,0)";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
